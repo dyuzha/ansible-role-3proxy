@@ -1,32 +1,33 @@
-# 3Proxy server version
+---
+# Версия исходного архива 3proxy.
 proxy3_version: 0.9.5
 
-# SHA256 of the source archive, update together with proxy3_version
+# SHA256 архива; обновлять одновременно с proxy3_version.
 proxy3_sources_checksum: "sha256:6f6da51d9bba93231e12acd707bb6cf86a1ab9491dc6dd0c79750cb3641541a3"
 
-# Port of HTTP proxy
+# Порт HTTP-прокси.
 proxy3_http_port: 3128
 
-# Port of SOCKS proxy
+# Порт SOCKS-прокси.
 proxy3_socks_port: 1080
 
-# System user ID and Group ID
+# Идентификаторы системной группы и пользователя 3proxy.
 proxy3_system_group_id: 200
 proxy3_system_user_id: 201
 
-# List of DNS servers
+# DNS-серверы для разрешения имён.
 proxy3_dns:
   - 1.1.1.1
   - 1.0.0.1
 
-# true if you want use the Uncomplicated Firewall
-# if false you may need to use other firewall
+# Включать ли настройку Uncomplicated Firewall.
+# Если false, правила доступа нужно настроить другим способом.
 proxy3_use_ufw: false
 
-# Build essential apt version
+# Версия пакета build-essential для apt.
 proxy3_build_essential_version: latest
 
-# Clients of proxy server (accept all connections if empty or undefined)
+# Клиенты прокси; при пустом или неопределённом списке принимаются все подключения.
 proxy3_clients:
   - name: client0
     password: qwe123
