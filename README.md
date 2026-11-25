@@ -2,7 +2,10 @@
 
 Ansible-роль устанавливает и настраивает прокси-сервер 3proxy с поддержкой HTTP и SOCKS-прокси на Debian и Ubuntu.
 
-[![Lint](https://github.com/dyuzha/ansible-role-3proxy/actions/workflows/lint.yml/badge.svg)](https://github.com/dyuzha/ansible-role-3proxy/actions/workflows/lint.yml)
+[![Lint](https://github.com/dyuzha/ansible-role-3proxy/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/dyuzha/ansible-role-3proxy/actions/workflows/lint.yml?query=branch%3Amain)
+[![License](https://img.shields.io/github/license/dyuzha/ansible-role-3proxy.svg)](LICENSE)
+[![Platforms](https://img.shields.io/badge/platforms-Debian%20%7C%20Ubuntu-informational)](meta/main.yml)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](.pre-commit-config.yaml)
 
 ## Возможности
 
@@ -18,7 +21,7 @@ Ansible-роль устанавливает и настраивает прокс
 
 - Debian Bookworm или Trixie;
 - Ubuntu Focal или Jammy;
-- Ansible версии 2.8 или новее;
+- Ansible версии 2.8 или новее (совпадает с `min_ansible_version` в `meta/main.yml`);
 - права `become: true` на целевых хостах;
 - доступ к интернету на целевых хостах;
 - коллекция `community.general`.

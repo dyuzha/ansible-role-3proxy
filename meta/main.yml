@@ -22,4 +22,7 @@ galaxy_info:
     - proxy
     - 3proxy
 
+collections:
+  - community.general
+
 dependencies: []
