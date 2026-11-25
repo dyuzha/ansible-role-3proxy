@@ -1,3 +1,4 @@
+---
 - name: "firewall | Install UFW"
   ansible.builtin.apt:
     name: ufw

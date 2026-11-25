@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  namespace: dyuzha
   role_name: proxy3
   author: Dyuzhev Matvey
   description: Deploy and configure HTTP and SOCKS proxy server "3proxy"

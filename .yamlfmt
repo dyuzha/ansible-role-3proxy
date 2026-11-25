@@ -1,0 +1,11 @@
+# Конфигурация форматирования YAML для standalone-роли.
+formatter:
+  type: basic
+  indent: 2
+  max_line_length: 160
+  include_document_start: true
+  pad_line_comments: 1
+  eof_newline: true
+  trim_trailing_whitespace: true
+  retain_line_breaks: true
+  scan_folded_as_literal: true

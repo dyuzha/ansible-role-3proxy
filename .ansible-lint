@@ -1,0 +1,7 @@
+---
+# Общие правила Ansible-роли.
+skip_list:
+  - var-naming[no-role-prefix]
+
+warn_list:
+  - run-once[task]

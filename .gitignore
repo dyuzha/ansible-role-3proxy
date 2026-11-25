@@ -3,5 +3,6 @@ inventory.ini
 ansible.cfg
 ansible.log
 *.DS_Store
+.ansible/
 backlog
 AGENTS.md

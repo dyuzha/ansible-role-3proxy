@@ -42,7 +42,7 @@ ansible-galaxy collection install community.general
   hosts: proxy
   become: true
   roles:
-    - role: 3proxy-ansible-role
+    - role: dyuzha.proxy3
 ```
 
 ### Пример с настройками
@@ -62,7 +62,7 @@ ansible-galaxy collection install community.general
       - name: client0
         password: "{{ vault_proxy3_client0_password }}"
   roles:
-    - role: 3proxy-ansible-role
+    - role: dyuzha.proxy3
 ```
 
 Пароли клиентов не следует хранить в открытом виде. Разместите их в зашифрованных переменных Ansible Vault, например в `group_vars/<группа>/vault.yml`.
@@ -120,6 +120,24 @@ ansible-playbook site.yml --syntax-check
 ```bash
 systemctl status 3proxy
 ```
+
+## Разработка
+
+Проверить роль локально:
+
+```bash
+./scripts/check.sh
+```
+
+Для запуска той же проверки перед каждым коммитом установите
+[`pre-commit`](https://pre-commit.com/) и выполните:
+
+```bash
+pre-commit install
+pre-commit run --all-files
+```
+
+GitHub Actions запускает `scripts/check.sh` на каждый push и pull request.
 
 ## Ограничения
 

@@ -1,3 +1,4 @@
+---
 - name: "service | Install systemd unit"
   ansible.builtin.copy:
     src: 3proxy.service

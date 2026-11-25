@@ -1,0 +1,11 @@
+---
+# Локальная проверка совпадает с проверкой в GitHub Actions.
+repos:
+  - repo: local
+    hooks:
+      - id: role-check
+        name: Check Ansible role
+        entry: ./scripts/check.sh
+        language: system
+        pass_filenames: false
+        always_run: true

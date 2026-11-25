@@ -1,3 +1,4 @@
+---
 - name: "install | Create system group"
   ansible.builtin.group:
     name: proxy3
