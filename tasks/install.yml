@@ -27,6 +27,7 @@
   ansible.builtin.get_url:
     url: "https://github.com/3proxy/3proxy/archive/refs/tags/{{ proxy3_version }}.tar.gz"
     dest: /tmp/{{ proxy3_version }}.tar.gz
+    checksum: "{{ proxy3_sources_checksum }}"
     mode: "644"
   run_once: true
 
@@ -36,13 +37,21 @@
     dest: /tmp/
     mode: "644"
     remote_src: true
+    creates: /tmp/3proxy-{{ proxy3_version }}/Makefile.Linux
   when: not ansible_check_mode
+
+- name: "Proxy3 : Check compiled binary"
+  ansible.builtin.stat:
+    path: /tmp/3proxy-{{ proxy3_version }}/bin/3proxy
+  register: proxy3_compiled_binary
 
 - name: "Proxy3 : Compile sources"
   community.general.make:
     chdir: /tmp/3proxy-{{ proxy3_version }}
     file: Makefile.Linux
-  when: not ansible_check_mode
+  when:
+    - not ansible_check_mode
+    - not proxy3_compiled_binary.stat.exists
 
 - name: "Proxy3 : Copy binaries"
   ansible.builtin.copy:

@@ -1,5 +1,8 @@
 # 3Proxy server version
-proxy3_version: 0.9.4
+proxy3_version: 0.9.5
+
+# SHA256 of the source archive, update together with proxy3_version
+proxy3_sources_checksum: "sha256:6f6da51d9bba93231e12acd707bb6cf86a1ab9491dc6dd0c79750cb3641541a3"
 
 # Port of HTTP proxy
 proxy3_http_port: 3128
