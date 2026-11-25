@@ -1,11 +1,11 @@
-- name: "Proxy3 : Create system group"
+- name: "install | Create system group"
   ansible.builtin.group:
     name: proxy3
     gid: "{{ proxy3_system_group_id }}"
     state: present
   become: true
 
-- name: "Proxy3 : Create system user"
+- name: "install | Create system user"
   ansible.builtin.user:
     name: proxy3
     group: proxy3
@@ -16,14 +16,14 @@
     state: present
   become: true
 
-- name: "Proxy3 : Install build-essential"
+- name: "install | Install build-essential"
   ansible.builtin.apt:
     name: build-essential
     state: "{{ proxy3_build_essential_version }}"
     update_cache: true
   become: true
 
-- name: "Proxy3 : Download sources"
+- name: "install | Download sources"
   ansible.builtin.get_url:
     url: "https://github.com/3proxy/3proxy/archive/refs/tags/{{ proxy3_version }}.tar.gz"
     dest: /tmp/{{ proxy3_version }}.tar.gz
@@ -31,7 +31,7 @@
     mode: "644"
   run_once: true
 
-- name: "Proxy3 : Unarchive sources"
+- name: "install | Unarchive sources"
   ansible.builtin.unarchive:
     src: /tmp/{{ proxy3_version }}.tar.gz
     dest: /tmp/
@@ -40,12 +40,12 @@
     creates: /tmp/3proxy-{{ proxy3_version }}/Makefile.Linux
   when: not ansible_check_mode
 
-- name: "Proxy3 : Check compiled binary"
+- name: "install | Check compiled binary"
   ansible.builtin.stat:
     path: /tmp/3proxy-{{ proxy3_version }}/bin/3proxy
   register: proxy3_compiled_binary
 
-- name: "Proxy3 : Compile sources"
+- name: "install | Compile sources"
   community.general.make:
     chdir: /tmp/3proxy-{{ proxy3_version }}
     file: Makefile.Linux
@@ -53,7 +53,7 @@
     - not ansible_check_mode
     - not proxy3_compiled_binary.stat.exists
 
-- name: "Proxy3 : Copy binaries"
+- name: "install | Copy binaries"
   ansible.builtin.copy:
     src: /tmp/3proxy-{{ proxy3_version }}/bin/3proxy
     dest: /usr/bin/3proxy
@@ -63,4 +63,4 @@
     remote_src: true
   become: true
   when: not ansible_check_mode
-  notify: "Proxy3 : Restart service"
+  notify: "Restart 3proxy service"

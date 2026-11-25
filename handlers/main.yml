@@ -1,9 +1,9 @@
-- name: "Proxy3 : Reload firewall"
+- name: "Reload UFW"
   community.general.ufw:
     state: reloaded
   become: true
 
-- name: "Proxy3 : Restart service"
+- name: "Restart 3proxy service"
   ansible.builtin.systemd:
     service: 3proxy
     state: restarted

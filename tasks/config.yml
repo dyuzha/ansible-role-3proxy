@@ -1,4 +1,5 @@
-- name: "Proxy3 : Create work dir"
+---
+- name: "config | Create work dir"
   ansible.builtin.file:
     path: /etc/3proxy
     state: directory
@@ -7,31 +8,27 @@
     mode: "600"
   become: true
 
-# Можно включить для отладки
-# - name: Show each client
-#   ansible.builtin.debug:
-#     msg: "Client: {{ item.name }}, Password: {{ item.password }}"
-#   loop: "{{ proxy3_clients }}"
-
-- name: "Proxy3 : Generate encrypted passwords"
+- name: "config | Generate encrypted passwords"
   ansible.builtin.command:
-    cmd: "openssl passwd -1 {{ client.password }}"
+    cmd: openssl passwd -1 -stdin
+    stdin: "{{ client.password }}"
   loop: "{{ proxy3_clients }}"
   loop_control:
     loop_var: client
     label: "{{ client.name }}"
-  register: encrypted_passwords
+  register: proxy3_encrypted_passwords
   when:
     - proxy3_clients is defined
     - proxy3_clients is iterable
   changed_when: false
+  no_log: true
 
-- name: "Proxy3 : Render config"
+- name: "config | Render config"
   ansible.builtin.template:
-    src: 3proxy-cfg.j2
+    src: 3proxy.cfg.j2
     dest: /etc/3proxy/3proxy.cfg
     owner: proxy3
     group: proxy3
     mode: "600"
   become: true
-  notify: "Proxy3 : Restart service"
+  notify: "Restart 3proxy service"

@@ -1,4 +1,4 @@
-- name: "Proxy3 : Install systemd unit"
+- name: "service | Install systemd unit"
   ansible.builtin.copy:
     src: 3proxy.service
     dest: /etc/systemd/system/3proxy.service
@@ -6,9 +6,9 @@
     group: proxy3
     mode: "644"
   become: true
-  notify: "Proxy3 : Restart service"
+  notify: "Restart 3proxy service"
 
-- name: "Proxy3 : Start and enable service"
+- name: "service | Start and enable service"
   ansible.builtin.systemd:
     service: 3proxy
     state: started
