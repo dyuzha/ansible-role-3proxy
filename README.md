@@ -2,6 +2,8 @@
 
 Ansible-роль устанавливает и настраивает прокси-сервер 3proxy с поддержкой HTTP и SOCKS-прокси на Debian и Ubuntu.
 
+[![Lint](https://github.com/dyuzha/ansible-role-3proxy/actions/workflows/lint.yml/badge.svg)](https://github.com/dyuzha/ansible-role-3proxy/actions/workflows/lint.yml)
+
 ## Возможности
 
 - установка 3proxy из исходного архива;
@@ -25,11 +27,40 @@ Ansible-роль устанавливает и настраивает прокс
 
 ## Установка
 
-Установите требуемую коллекцию Ansible:
+### Из Ansible Galaxy
+
+После публикации роли в Ansible Galaxy установите её через файл зависимостей, например `roles/requirements.yml`:
+
+```yaml
+---
+roles:
+  - name: dyuzha.proxy3
+```
+
+```bash
+ansible-galaxy role install -r roles/requirements.yml
+```
+
+### Непосредственно из GitHub
+
+До публикации в Galaxy или для фиксации конкретной ветки/версии используйте GitHub-репозиторий:
+
+```yaml
+---
+roles:
+  - name: dyuzha.proxy3
+    src: https://github.com/dyuzha/ansible-role-3proxy.git
+    scm: git
+    version: main
+```
+
+Коллекция `community.general` нужна в обоих вариантах. Установите её отдельно:
 
 ```bash
 ansible-galaxy collection install community.general
 ```
+
+Файл `requirements.yml` в репозитории содержит зависимости самой роли — коллекции Ansible. Файл `roles/requirements.yml` в пользовательском проекте содержит роли из Galaxy или GitHub.
 
 Если роль подключается из локального репозитория, отдельная установка не нужна.
 
