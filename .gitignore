@@ -4,3 +4,4 @@ ansible.cfg
 ansible.log
 *.DS_Store
 backlog
+AGENTS.md
