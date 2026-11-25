@@ -1,0 +1,24 @@
+---
+galaxy_info:
+  role_name: proxy3
+  author: Dyuzhev Matvey
+  description: Deploy and configure HTTP and SOCKS proxy server "3proxy"
+  license: MIT
+
+  min_ansible_version: "2.8"
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+    - name: Debian
+      versions:
+        - bookworm
+        - trixie
+
+  galaxy_tags:
+    - proxy
+    - 3proxy
+
+dependencies: []

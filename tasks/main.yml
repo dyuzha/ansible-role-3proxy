@@ -1,0 +1,16 @@
+- name: "Proxy3 : Install"
+  ansible.builtin.import_tasks: install.yml
+  tags: install
+
+- name: "Proxy3 : Configure"
+  ansible.builtin.import_tasks: config.yml
+  tags: config
+
+- name: "Proxy3 : Service"
+  ansible.builtin.import_tasks: service.yml
+  tags: service
+
+- name: "Proxy3 : Firewall"
+  ansible.builtin.import_tasks: firewall.yml
+  when: proxy3_use_ufw
+  tags: firewall

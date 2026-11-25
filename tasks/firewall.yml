@@ -1,0 +1,22 @@
+- name: "Proxy3 : Install UFW"
+  ansible.builtin.apt:
+    name: ufw
+    state: present
+    update_cache: true
+  become: true
+
+- name: "Proxy3 : Allow proxy ports in UFW"
+  community.general.ufw:
+    rule: allow
+    port: "{{ port }}"
+    protocol: tcp
+    state: enabled
+  loop:
+    - "{{ proxy3_http_port }}"
+    - "{{ proxy3_socks_port }}"
+    - "{{ ansible_port | default(22) }}"
+  loop_control:
+    loop_var: port
+    label: "{{ port }}/tcp"
+  become: true
+  notify: "Proxy3 : Reload firewall"

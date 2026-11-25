@@ -1,0 +1,13 @@
+- name: "Proxy3 : Reload firewall"
+  community.general.ufw:
+    state: reloaded
+  become: true
+
+- name: "Proxy3 : Restart service"
+  ansible.builtin.systemd:
+    service: 3proxy
+    state: restarted
+    enabled: true
+    daemon_reload: true
+  become: true
+  when: not ansible_check_mode

@@ -1,0 +1,18 @@
+setgid {{ proxy3_system_group_id }}
+setuid {{ proxy3_system_user_id }}
+{% for server in proxy3_dns -%}
+nserver {{ server }}
+{% endfor %}
+nscache 65536
+timeouts 1 5 30 60 180 1800 15 60
+daemon
+{% if proxy3_clients is defined and proxy3_clients is iterable and proxy3_clients %}
+{% for client in proxy3_clients %}
+users "{{ client.name }}:CR:{{ encrypted_passwords.results[loop.index0].stdout }}"
+{% endfor %}
+auth cache strong
+{% else %}
+auth none
+{% endif %}
+proxy -n -p{{ proxy3_http_port }} -a
+socks -n -p{{ proxy3_socks_port }}

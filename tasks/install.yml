@@ -1,0 +1,57 @@
+- name: "Proxy3 : Create system group"
+  ansible.builtin.group:
+    name: proxy3
+    gid: "{{ proxy3_system_group_id }}"
+    state: present
+  become: true
+
+- name: "Proxy3 : Create system user"
+  ansible.builtin.user:
+    name: proxy3
+    group: proxy3
+    uid: "{{ proxy3_system_user_id }}"
+    system: true
+    create_home: false
+    shell: /sbin/nologin
+    state: present
+  become: true
+
+- name: "Proxy3 : Install build-essential"
+  ansible.builtin.apt:
+    name: build-essential
+    state: "{{ proxy3_build_essential_version }}"
+    update_cache: true
+  become: true
+
+- name: "Proxy3 : Download sources"
+  ansible.builtin.get_url:
+    url: "https://github.com/3proxy/3proxy/archive/refs/tags/{{ proxy3_version }}.tar.gz"
+    dest: /tmp/{{ proxy3_version }}.tar.gz
+    mode: "644"
+  run_once: true
+
+- name: "Proxy3 : Unarchive sources"
+  ansible.builtin.unarchive:
+    src: /tmp/{{ proxy3_version }}.tar.gz
+    dest: /tmp/
+    mode: "644"
+    remote_src: true
+  when: not ansible_check_mode
+
+- name: "Proxy3 : Compile sources"
+  community.general.make:
+    chdir: /tmp/3proxy-{{ proxy3_version }}
+    file: Makefile.Linux
+  when: not ansible_check_mode
+
+- name: "Proxy3 : Copy binaries"
+  ansible.builtin.copy:
+    src: /tmp/3proxy-{{ proxy3_version }}/bin/3proxy
+    dest: /usr/bin/3proxy
+    owner: root
+    group: root
+    mode: "744"
+    remote_src: true
+  become: true
+  when: not ansible_check_mode
+  notify: "Proxy3 : Restart service"
