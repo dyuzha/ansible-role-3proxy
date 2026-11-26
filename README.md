@@ -6,6 +6,7 @@ Ansible-роль устанавливает и настраивает прокс
 [![License](https://img.shields.io/github/license/dyuzha/ansible-role-3proxy.svg)](LICENSE)
 [![Platforms](https://img.shields.io/badge/platforms-Debian%20%7C%20Ubuntu-informational)](meta/main.yml)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](.pre-commit-config.yaml)
+[![Release](https://img.shields.io/github/v/release/dyuzha/ansible-role-3proxy)](https://github.com/dyuzha/ansible-role-3proxy/releases/latest)
 
 ## Возможности
 
